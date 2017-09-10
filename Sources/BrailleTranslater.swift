@@ -17,8 +17,9 @@ enum Target {
 
 public class BrailleTranslater {
     let makePath = "/usr/bin/make"
+    var message = ""
     
-    public init() {
+    init() {
         //shell(launchPath: "/bin/pwd")
         // Create a FileManager instance
         
@@ -35,8 +36,32 @@ public class BrailleTranslater {
         
     }
     
-    public func convert(target: String) {
-        let (output, status) = shell(launchPath: makePath, arguments: [target, "PLAINTEXT=[\"I\", \"Love\", \"U\"]"])
+    convenience init(postCard: PostCard) {
+        self.init()
+        
+        var loopcount = 1
+        message = "PLAINTEXT=["
+        print("\nChecking Message : \(message)")
+        
+        for element in postCard.message {
+            print(element)
+            message.append("\"\(element)\"")
+            
+            if postCard.message.count > loopcount {
+                loopcount += 1
+                message.append(", ")
+            }
+        }
+        message.append("]")
+        
+        print("Checking Message : \(message)\n\n")
+    }
+    
+    
+    func convert(target: String) {
+        //let (output, status) = shell(launchPath: makePath, arguments: [target, "PLAINTEXT=[\"I\", \"Love\", \"U\"]"])
+        
+        let (output, status) = shell(launchPath: makePath, arguments: [target, message])
         print(output! + " \(status)");
     }
 

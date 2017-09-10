@@ -1,10 +1,11 @@
 //
 //  main.swift
-//  PerfectTemplate
 //
-//  Created by Kyle Jessup on 2015-11-05.
-//	Copyright (C) 2015 PerfectlySoft, Inc.
+//  BraillePostCard
 //
+//  Created by Myoungwoo Jang on 10/09/2017.
+//
+
 
 import PerfectLib
 import PerfectHTTP
@@ -72,13 +73,10 @@ routes.add(method: .post, uri: "/api/json", handler: {
             let from = json?["from"] as? [String:Any]
             let name = from?["name"] as? String ?? "Undefined"
             
-            for (key, value) in json! {
-                print("\(key) : \(value)")
-            }
-            
+            let postCard = PostCard(postCardJSON: json)
             //TODO
             // Call : Make Call
-            let brailleTranslater = BrailleTranslater()
+            let brailleTranslater = BrailleTranslater(postCard: postCard)
             brailleTranslater.convert(target: "all")
             //
             try response.setBody(json: [

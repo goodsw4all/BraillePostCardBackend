@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B4DACAF1F64DFD5003B411B /* PostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4DACAE1F64DFD5003B411B /* PostCard.swift */; };
+		2B4DACB01F64E984003B411B /* PostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4DACAE1F64DFD5003B411B /* PostCard.swift */; };
 		OBJ_1000 /* d1_srtp.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_258 /* d1_srtp.c */; };
 		OBJ_1001 /* d1_srvr.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_259 /* d1_srvr.c */; };
 		OBJ_1002 /* d2i_pr.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_260 /* d2i_pr.c */; };
@@ -2149,8 +2150,8 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_8 /* BrailleTranslater.swift */,
-				OBJ_9 /* main.swift */,
 				2B4DACAE1F64DFD5003B411B /* PostCard.swift */,
+				OBJ_9 /* main.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -3322,6 +3323,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_1678 /* BrailleTranslater.swift in Sources */,
+				2B4DACB01F64E984003B411B /* PostCard.swift in Sources */,
 				OBJ_1679 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
