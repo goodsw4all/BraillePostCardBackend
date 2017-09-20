@@ -11,7 +11,7 @@ SRCDIR = src
 SLIC3R = /Applications/Slic3r.app/Contents/MacOS/slic3r
 OPENSCAD =/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD
 #PLAINTEXT?=["A", "B", "C"]
-PLAINTEXT?=["ABC"]
+PLAINTEXT?=["LOVE"]
 
 STL_TARGETS = $(patsubst %.scad,%.stl,$(wildcard *.scad))
 GCODE_TARGETS = $(patsubst %.scad,%.gcode,$(wildcard *.scad))
@@ -28,7 +28,7 @@ gcode: $(GCODE_TARGETS)
 
 #slic3r my_model.stl --load my_config.ini --fill-pattern concentric
 %.gcode: %.stl
-	$(SLIC3R) $< -o $@ --load config.ini --fill-pattern concentric --print-center 0,0 
+	$(SLIC3R) $< -o $@ --load config.ini --fill-pattern concentric --print-center 0,0
 
 clean:
 	rm -f *.stl *.gcode

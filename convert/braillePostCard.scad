@@ -5,30 +5,42 @@
  * derived from https://www.thingiverse.com/thing:8000
  */
 
-message = [
-	"All human beings are",
-	"born free and equal",
-	"in dignity and",
-	"rights. They are",
-	"endowed with reason",
-	"and conscience and",
-	"should act towards",
-	"one another in a",
-	"spirit of",
-	"brotherhood."
-];
+/* 
+   1. Create a new .scad script with a "use" statement at the top of your .scad file and then use the drawText function to print just the braille. 
+      There are four parameters:
+		text       - string that you want printed in braille (required)
+		dotHeight  - float z height of each dot. Make sure this value is at least as large as your layer height. (optional, defaults to 0.5)
+		dotRadius  - float radius of each dot (optional, defaults to 1)
+		charWidth  - float width of each braille character (optional, defaults to 7)
+		resolution - the resolution of the dots (optional, defaults to 10)
+				You will have to manually position and draw each line with this method
+	
+	2. Open the .scad script and specify the text you want to print in the testText variable. 
+	   You will also need to specify the width of the slab that it's drawn on. 
+	   It takes quite a bit of computational power to render this stuff, it almost brought my laptop to a standstill.
+ */
+
+// Lines 7, # of Character 12
+message = [ "I", "Love", "You"];
 
 dotHeight = 0.5;
 dotRadius = 1;
 charWidth = 7;
 resolution = 10;
 lineHeight = 12;
-totalHeight = len(message)*lineHeight;
+totalHeight = len(message) * lineHeight;
 slabX = 150;
 slabY = totalHeight;
 
-charKeys   = ["a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F", "g", "G", "h", "H", "i", "I", "j", "J", "k", "K", "l", "L", "m", "M", "n", "N", "o", "O", "p", "P", "q", "Q", "r", "R", "s", "S", "t", "T", "u", "U", "v", "V", "w", "W", "x", "X", "y", "Y", "z", "Z", ",", ";", ":", ".", "!", "(", ")", "?", "\"", "*", "'", "-"];
-charValues = [[1], [1], [1, 2], [1, 2], [1, 4], [1, 4], [1, 4, 5], [1, 4, 5], [1, 5], [1, 5], [1, 2, 4], [1, 2, 4], [1, 2, 4, 5], [1, 2, 4, 5], [1, 2, 5], [1, 2, 5], [2, 4], [2, 4], [2, 4, 5], [2, 4, 5], [1, 3], [1, 3], [1, 2, 3], [1, 2, 3], [1, 3, 4], [1, 3, 4], [1, 3, 4, 5], [1, 3, 4, 5], [1, 3, 5], [1, 3, 5], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4, 5], [1, 2, 3, 4, 5], [1, 2, 3, 5], [1, 2, 3, 5], [2, 3, 4], [2, 3, 4], [2, 3, 4, 5], [2, 3, 4, 5], [1, 3, 6], [1, 3, 6], [1, 2, 3, 6], [1, 2, 3, 6], [2, 4, 5, 6], [2, 4, 5, 6], [1, 3, 4, 6], [1, 3, 4, 6], [1, 3, 4, 5, 6], [1, 3, 4, 5, 6], [1, 3, 5, 6], [1, 3, 5, 6], [2], [2, 3], [2, 5], [2, 5, 6], [2, 3, 5], [2, 3, 5, 6], [2, 3, 5, 6], [2, 3, 6], [2, 3, 6], [3, 5], [3], [3, 6]];
+charKeys   = ["a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F", "g", "G", "h", "H", "i", "I", "j", "J", "k", "K", "l", "L", "m", "M", "n", "N", 
+              "o", "O", "p", "P", "q", "Q", "r", "R", "s", "S", "t", "T", "u", "U", "v", "V", "w", "W", "x", "X", "y", "Y", "z", "Z", 
+			  ",", ";", ":", ".", "!", "(", ")", "?", "\"", "*", "'", "-"];
+			  
+charValues = [[1], [1], [1, 2], [1, 2], [1, 4], [1, 4], [1, 4, 5], [1, 4, 5], [1, 5], [1, 5], [1, 2, 4], [1, 2, 4], [1, 2, 4, 5], [1, 2, 4, 5], [1, 2, 5], 
+              [1, 2, 5], [2, 4], [2, 4], [2, 4, 5], [2, 4, 5], [1, 3], [1, 3], [1, 2, 3], [1, 2, 3], [1, 3, 4], [1, 3, 4], [1, 3, 4, 5], [1, 3, 4, 5], [1, 3, 5],
+		      [1, 3, 5], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4, 5], [1, 2, 3, 4, 5], [1, 2, 3, 5], [1, 2, 3, 5], [2, 3, 4], [2, 3, 4], [2, 3, 4, 5], [2, 3, 4, 5], 
+			  [1, 3, 6], [1, 3, 6], [1, 2, 3, 6], [1, 2, 3, 6], [2, 4, 5, 6], [2, 4, 5, 6], [1, 3, 4, 6], [1, 3, 4, 6], [1, 3, 4, 5, 6], [1, 3, 4, 5, 6], [1, 3, 5, 6], 
+			  [1, 3, 5, 6], [2], [2, 3], [2, 5], [2, 5, 6], [2, 3, 5], [2, 3, 5, 6], [2, 3, 5, 6], [2, 3, 6], [2, 3, 6], [3, 5], [3], [3, 6]];
 
 module drawDot(location, dotHeight = 0.5, dotRadius = 0.5, resolution = 10) {
 	translate(location) {
